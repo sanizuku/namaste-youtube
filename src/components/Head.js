@@ -15,7 +15,7 @@ const Head = () => {
   useEffect(() => {
     const timer = setTimeout(() => getSearchSuggestion(), 200);
     return () => clearTimeout(timer);
-  }, [searchQuery.getSearchSuggestion]);
+  }, [searchQuery, getSearchSuggestion]);
 
   const getSearchSuggestion = async () => {
     const data = await fetch(Youtube_Search_Query_Api + searchQuery);
