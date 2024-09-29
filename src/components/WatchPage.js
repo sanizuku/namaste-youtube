@@ -4,7 +4,7 @@ import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import { Google_Api_Key } from "../utils/constants";
 import ReactPlayer from "react-player";
-import ExpandableDescription from "./ExpandableDescription";
+// import ExpandableDescription from "./ExpandableDescription";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -27,7 +27,7 @@ const WatchPage = () => {
   useEffect(() => {
     dispatch(closeMenu());
     handleClick();
-  }, []);
+  });
 
   return (
     <div>

@@ -2,11 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import {
   FaHome,
-  FaYoutube,
-  FaListAlt,
-  FaUserCircle,
-  FaVideo,
-  FaMusic,
+  // FaYoutube,
+  // FaListAlt,
+  // FaUserCircle,
+  // FaVideo,
+  // FaMusic,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 const Sidebar = () => {

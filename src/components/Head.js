@@ -22,7 +22,7 @@ const Head = () => {
     const json = await data.json();
     setSuggestions(json[1]);
   };
-  console.log(suggestions);
+  // console.log(suggestions);
   return (
     <div className="relative bg-white shadow-lg top-0 z-30 w-full grid grid-flow-col p-4 m-1">
       <div className="container mx-auto flex items-center">
@@ -32,7 +32,7 @@ const Head = () => {
           alt="hamburger-icon"
           src="https://static.vecteezy.com/system/resources/previews/021/190/402/non_2x/hamburger-menu-filled-icon-in-transparent-background-basic-app-and-web-ui-bold-line-icon-eps10-free-vector.jpg"
         />
-        <a href="">
+        <a href="LOGO">
           <img
             className="h-12"
             alt="youtube-logo"
