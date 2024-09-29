@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { Youtube_Search_Query_Api } from "../utils/constants";
@@ -11,17 +11,16 @@ const Head = () => {
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
-
+  const getSearchSuggestion = useCallback(async () => {
+    const data = await fetch(Youtube_Search_Query_Api + searchQuery);
+    const json = await data.json();
+    setSuggestions(json[1]);
+  }, [searchQuery]);
   useEffect(() => {
     const timer = setTimeout(() => getSearchSuggestion(), 200);
     return () => clearTimeout(timer);
   }, [searchQuery, getSearchSuggestion]);
 
-  const getSearchSuggestion = async () => {
-    const data = await fetch(Youtube_Search_Query_Api + searchQuery);
-    const json = await data.json();
-    setSuggestions(json[1]);
-  };
   // console.log(suggestions);
   return (
     <div className="relative bg-white shadow-lg top-0 z-30 w-full grid grid-flow-col p-4 m-1">
