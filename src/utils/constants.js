@@ -5,6 +5,6 @@ const Youtube_Video_Url =
   Google_Api_Key;
 
 export const Youtube_Search_Query_Api =
-  "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+  "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
 
 export default Youtube_Video_Url;
