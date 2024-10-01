@@ -17,7 +17,7 @@ const Head = () => {
     setSuggestions(json[1]);
   }, [searchQuery]);
   useEffect(() => {
-    const timer = setTimeout(() => getSearchSuggestion(), 200);
+    const timer = setTimeout(() => getSearchSuggestion(), 200); //Debouncing
     return () => clearTimeout(timer);
   }, [searchQuery, getSearchSuggestion]);
 
