@@ -1,27 +1,52 @@
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
 import { Youtube_Search_Query_Api } from "../utils/constants";
+import { cacheResults } from "../utils/searchSlice";
+import SearchVideos from "./SearchVideos";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
+  const [currentSearch, setCurrentSearch] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(true);
   const dispatch = useDispatch();
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
+
+  const searchCache = useSelector((store) => store.search);
   const getSearchSuggestion = useCallback(async () => {
     const data = await fetch(Youtube_Search_Query_Api + searchQuery);
     const json = await data.json();
     setSuggestions(json[1]);
+
+    //update cache
+
+    dispatch(cacheResults({ [searchQuery]: json[1] }));
+    // eslint-disable-next-line
   }, [searchQuery]);
   useEffect(() => {
-    const timer = setTimeout(() => getSearchSuggestion(), 200); //Debouncing
+    const timer = setTimeout(
+      () =>
+        searchCache[searchQuery]
+          ? setSuggestions(searchCache[searchQuery])
+          : getSearchSuggestion(),
+      200
+    ); //Debouncing
     return () => clearTimeout(timer);
+    // eslint-disable-next-line
   }, [searchQuery, getSearchSuggestion]);
 
   // console.log(suggestions);
+  // useEffect(()=>{
+
+  // },[])
+  const searchVideos = (query) => {
+    console.log("Searching for:", query); // Log the query
+    setCurrentSearch(query);
+    setShowSuggestions(false); // Hide suggestions after selection
+  };
   return (
     <div className="relative bg-white shadow-lg top-0 z-30 w-full grid grid-flow-col p-4 m-1">
       <div className="container mx-auto flex items-center">
@@ -48,9 +73,17 @@ const Head = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search"
             onFocus={() => setShowSuggestions(true)}
-            onBlur={() => setShowSuggestions(false)}
+            //  onBlur={() => setShowSuggestions(false)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                searchVideos(searchQuery); // Trigger search on Enter
+              }
+            }}
           />
-          <button className="border border-gray-400 p-2 rounded-r-full">
+          <button
+            onClick={() => searchVideos(searchQuery)}
+            className="border border-gray-400 p-2 rounded-r-full"
+          >
             🔍
           </button>
         </div>
@@ -58,8 +91,15 @@ const Head = () => {
           <div className="absolute h-fit top-full left-0 w-1/2 bg-white border border-gray-200 rounded-lg py-2 px-2 z-40">
             <ul>
               {suggestions &&
-                suggestions.map((s) => (
-                  <li key={s} className="px-3 py-2 shadow-sm hover:bg-gray-200">
+                suggestions.map((s, index) => (
+                  <li
+                    key={index}
+                    onClick={() => {
+                      setSearchQuery(s); // Set input value to clicked suggestion
+                      searchVideos(s); // Call search function
+                    }}
+                    className="px-3 py-2 shadow-sm hover:bg-gray-200"
+                  >
                     {s}
                   </li>
                 ))}
@@ -72,6 +112,7 @@ const Head = () => {
         alt="user-icon"
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdc-W5ojfTUtpuXImje0ZtN86Fugts0-_bKw&s"
       />
+      {currentSearch && <SearchVideos data={currentSearch} />}
     </div>
   );
 };
