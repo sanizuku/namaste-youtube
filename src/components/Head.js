@@ -4,6 +4,7 @@ import { toggleMenu } from "../utils/appSlice";
 import { Youtube_Search_Query_Api } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
 import SearchVideos from "./SearchVideos";
+// import { useNavigate } from "react-router-dom";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -14,7 +15,7 @@ const Head = () => {
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
-
+  // const navigate = useNavigate();
   const searchCache = useSelector((store) => store.search);
   const getSearchSuggestion = useCallback(async () => {
     const data = await fetch(Youtube_Search_Query_Api + searchQuery);
@@ -36,7 +37,7 @@ const Head = () => {
     ); //Debouncing
     return () => clearTimeout(timer);
     // eslint-disable-next-line
-  }, [searchQuery, getSearchSuggestion]);
+  }, [searchQuery]);
 
   // console.log(suggestions);
   // useEffect(()=>{
@@ -45,6 +46,8 @@ const Head = () => {
   const searchVideos = (query) => {
     console.log("Searching for:", query); // Log the query
     setCurrentSearch(query);
+    window.location.href = `/results?search_query=${query}`;
+    // navigate(`/searchResults?q=${query}`);
     setShowSuggestions(false); // Hide suggestions after selection
   };
   return (

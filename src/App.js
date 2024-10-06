@@ -23,7 +23,7 @@ function App() {
           element: <WatchPage />,
         },
         {
-          path: "searchResults",
+          path: "results",
           element: <SearchReults />,
         },
       ],
