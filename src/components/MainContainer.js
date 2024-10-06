@@ -1,8 +1,15 @@
 import React from "react";
 import ButtonList from "./ButtonList";
 import VideoContainer from "./VideoContainer";
+import { useLocation } from "react-router-dom";
+import SearchResults from "./SearchReults";
 
 const MainContainer = () => {
+  const location = useLocation(); // Get the current route
+
+  // Check if the current path contains '/search'
+  const isSearchResultsPage = location.pathname.includes("/results");
+
   return (
     // <div className="flex-1 overflow-hidden">
     //   {/* Sticky Button List */}
@@ -23,7 +30,7 @@ const MainContainer = () => {
 
       {/* Scrollable Video Container */}
       <div className="flex-1 overflow-y-auto p-4">
-        <VideoContainer />
+        {isSearchResultsPage ? <SearchResults /> : <VideoContainer />}
       </div>
     </div>
   );
