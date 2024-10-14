@@ -9,8 +9,6 @@ import {
 } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
 import SearchVideos from "./SearchVideos";
-import ToggleSwitch from "./ToogleSwitch";
-// import { useNavigate } from "react-router-dom";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -21,8 +19,7 @@ const Head = () => {
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
-  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
-  // const navigate = useNavigate();
+
   const searchCache = useSelector((store) => store.search);
   const getSearchSuggestion = useCallback(async () => {
     const data = await fetch(Youtube_Search_Query_Api + searchQuery);
