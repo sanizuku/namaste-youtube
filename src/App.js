@@ -34,6 +34,7 @@ function App() {
       <div className="flex flex-col h-screen overflow-hidden">
         <Head />
         <RouterProvider router={appRouter} />
+
         {/**
          *Head
          *Body

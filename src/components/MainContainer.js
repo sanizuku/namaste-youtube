@@ -3,13 +3,13 @@ import ButtonList from "./ButtonList";
 import VideoContainer from "./VideoContainer";
 import { useLocation } from "react-router-dom";
 import SearchResults from "./SearchReults";
+import { useSelector } from "react-redux";
 
 const MainContainer = () => {
   const location = useLocation(); // Get the current route
-
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   // Check if the current path contains '/search'
   const isSearchResultsPage = location.pathname.includes("/results");
-
   return (
     // <div className="flex-1 overflow-hidden">
     //   {/* Sticky Button List */}
@@ -24,7 +24,11 @@ const MainContainer = () => {
     // </div>
     <div className="flex-1 flex flex-col">
       {/* Sticky Button List */}
-      <div className="sticky top-0 z-10 bg-white">
+      <div
+        className={`sticky top-0 z-10 ${
+          isDarkMode ? "bg-zinc-900 text-white" : "bg-white text-black"
+        }`}
+      >
         <ButtonList />
       </div>
 

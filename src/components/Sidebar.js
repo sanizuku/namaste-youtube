@@ -39,18 +39,24 @@ const Sidebar = () => {
   // );
 
   return (
-    <div className="bg-white w-50 p-2 m-2 sticky top-0 h-screen">
+    <div className="w-50 px-2 m-2  sticky top-0 h-screen">
       <ul>
-        <li className="hover:bg-gray-200 rounded-md ">
+        <li className="transform  hover:bg-zinc-600 transition duration-500 hover:scale-125 rounded-md px-6">
           <Link className="flex" to="/">
-            <FaHome size={25} color="black" />
-            <h4 className="text-lg mx-5 text-center">Home</h4>
+            {/* <FaHome size={25} color="black" /> */}
+            <h4 className="text-lg text-center">Home</h4>
           </Link>
         </li>
 
-        <li>Shorts</li>
-        <li>Videos</li>
-        <li>Live</li>
+        <li className="transform  hover:bg-zinc-600 transition duration-500 hover:scale-125 rounded-md px-6">
+          Shorts
+        </li>
+        <li className="transform  hover:bg-zinc-600 transition duration-500 hover:scale-125 rounded-md px-6">
+          Videos
+        </li>
+        <li className="transform  hover:bg-zinc-600 transition duration-500 hover:scale-125 rounded-md px-6">
+          Live
+        </li>
       </ul>
       <h1 className="font-bold pt-5">Subscriptions</h1>
       <ul>

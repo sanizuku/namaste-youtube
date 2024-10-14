@@ -1,9 +1,15 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../utils/appSlice";
-import { Youtube_Search_Query_Api } from "../utils/constants";
+import {
+  MENU_LOGO_URL,
+  USER_ICON_URL,
+  YOUTUBE_LOGO_URL,
+  Youtube_Search_Query_Api,
+} from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
 import SearchVideos from "./SearchVideos";
+import ToggleSwitch from "./ToogleSwitch";
 // import { useNavigate } from "react-router-dom";
 
 const Head = () => {
@@ -15,6 +21,7 @@ const Head = () => {
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   // const navigate = useNavigate();
   const searchCache = useSelector((store) => store.search);
   const getSearchSuggestion = useCallback(async () => {
@@ -51,32 +58,38 @@ const Head = () => {
     setShowSuggestions(false); // Hide suggestions after selection
   };
   return (
-    <div className="relative bg-white shadow-lg top-0 z-30 w-full grid grid-flow-col p-4 m-1">
+    <div
+      className={`relative shadow-lg top-0 z-30 w-full grid grid-flow-col p-4  ${
+        isDarkMode ? "bg-zinc-900 text-white" : "bg-white text-black"
+      }`}
+    >
       <div className="container mx-auto flex items-center">
         <img
           onClick={() => toggleMenuHandler()}
           className="h-12 cursor-pointer"
           alt="hamburger-icon"
-          src="https://static.vecteezy.com/system/resources/previews/021/190/402/non_2x/hamburger-menu-filled-icon-in-transparent-background-basic-app-and-web-ui-bold-line-icon-eps10-free-vector.jpg"
+          src={MENU_LOGO_URL}
         />
         <a href="LOGO">
           <img
-            className="h-12"
+            className="h-12 ml-4"
             alt="youtube-logo"
-            src="https://1000logos.net/wp-content/uploads/2017/05/Youtube-logo.jpg"
+            src={YOUTUBE_LOGO_URL}
           />
         </a>
       </div>
-      <div className="col-span-10 px-10 relative">
+      <div className="col-span-10 px-10 relative ml-24">
         <div>
           <input
-            className="w-1/2 border border-gray-400 p-2 rounded-l-full"
+            className={`w-1/2 border border-gray-400 p-2 rounded-l-full ${
+              isDarkMode ? "bg-black text-white" : "bg-white text-black"
+            }`}
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search"
             onFocus={() => setShowSuggestions(true)}
-            //  onBlur={() => setShowSuggestions(false)}
+            onBlur={() => setShowSuggestions(false)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 searchVideos(searchQuery); // Trigger search on Enter
@@ -91,7 +104,11 @@ const Head = () => {
           </button>
         </div>
         {searchQuery && showSuggestions && (
-          <div className="absolute h-fit top-full left-0 w-1/2 bg-white border border-gray-200 rounded-lg py-2 px-2 z-40">
+          <div
+            className={`w-1/2 absolute h-fit top-full border border-gray-200 rounded-lg py-2 px-2 z-40 ${
+              isDarkMode ? "bg-zinc-900 text-white" : "bg-white text-black"
+            }`}
+          >
             <ul>
               {suggestions &&
                 suggestions.map((s, index) => (
@@ -101,7 +118,7 @@ const Head = () => {
                       setSearchQuery(s); // Set input value to clicked suggestion
                       searchVideos(s); // Call search function
                     }}
-                    className="px-3 py-2 shadow-sm hover:bg-gray-200"
+                    className="px-3 py-2 shadow-sm hover:bg-gray-500"
                   >
                     {s}
                   </li>
@@ -110,11 +127,8 @@ const Head = () => {
           </div>
         )}
       </div>
-      <img
-        className="h-9"
-        alt="user-icon"
-        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdc-W5ojfTUtpuXImje0ZtN86Fugts0-_bKw&s"
-      />
+      <ToggleSwitch />
+      <img className="h-9" alt="user-icon" src={USER_ICON_URL} />
       {currentSearch && <SearchVideos data={currentSearch} />}
     </div>
   );
