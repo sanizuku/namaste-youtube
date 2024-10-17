@@ -4,7 +4,8 @@ import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import { Google_Api_Key } from "../utils/constants";
 import ReactPlayer from "react-player";
-// import ExpandableDescription from "./ExpandableDescription";
+import CommentContainer from "./CommentContainer";
+import LiveChat from "./LiveChat";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
@@ -31,28 +32,30 @@ const WatchPage = () => {
   }, []);
 
   return (
-    <div>
-      {/* <img
-        src={videoData?.items[0]?.snippet?.thumbnails?.high?.url}
-        alt="videoTHumbnail"
-      /> */}
-      <ReactPlayer
-        url={"https://www.youtube.com/embed/" + searchParams.get("v")}
-        controls={true} // Enables play/pause controls
-        playing={true}
-        width="966px"
-        height="543px"
-      />
-      <h1 className="p-2 m-2 font-bold">
-        {videoData?.items[0]?.snippet?.title}
-      </h1>
-      {/* {videoData.length > 0 ? (
-        <ExpandableDescription
-          description={videoData?.items[0]?.snippet?.description}
-        />
-      ) : (
-        "....Loding"
-      )} */}
+    <div className="flex flex-col w-full">
+      <div className="px-5 flex">
+        <div>
+          <ReactPlayer
+            url={"https://www.youtube.com/embed/" + searchParams.get("v")}
+            controls={true} // Enables play/pause controls
+            playing={true}
+            width="900px"
+            height="600px"
+          />
+          <h1 className="p-2 m-2 font-bold">
+            {videoData?.items[0]?.snippet?.title}
+          </h1>
+        </div>
+
+        <div className="w-full">
+          <LiveChat />
+        </div>
+      </div>
+
+      <div>
+        <CommentContainer />
+      </div>
+      <div className="mb-12"></div>
     </div>
   );
 };

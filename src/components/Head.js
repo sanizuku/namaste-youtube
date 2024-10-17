@@ -9,6 +9,9 @@ import {
 } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
 import SearchVideos from "./SearchVideos";
+import ToggleSwitch from "./ToogleSwitch";
+
+// import { useNavigate } from "react-router-dom";
 
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -19,7 +22,8 @@ const Head = () => {
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
   };
-
+  const isDarkMode = useSelector((state) => state.theme.isDarkMode);
+  // const navigate = useNavigate();
   const searchCache = useSelector((store) => store.search);
   const getSearchSuggestion = useCallback(async () => {
     const data = await fetch(Youtube_Search_Query_Api + searchQuery);
@@ -43,10 +47,6 @@ const Head = () => {
     // eslint-disable-next-line
   }, [searchQuery]);
 
-  // console.log(suggestions);
-  // useEffect(()=>{
-
-  // },[])
   const searchVideos = (query) => {
     console.log("Searching for:", query); // Log the query
     setCurrentSearch(query);
@@ -67,7 +67,7 @@ const Head = () => {
           alt="hamburger-icon"
           src={MENU_LOGO_URL}
         />
-        <a href="LOGO">
+        <a href="/">
           <img
             className="h-12 ml-4"
             alt="youtube-logo"
@@ -78,7 +78,7 @@ const Head = () => {
       <div className="col-span-10 px-10 relative ml-24">
         <div>
           <input
-            className={`w-1/2 border border-gray-400 p-2 rounded-l-full ${
+            className={`w-2/3 border border-gray-400 p-2 rounded-l-full ${
               isDarkMode ? "bg-black text-white" : "bg-white text-black"
             }`}
             type="text"
@@ -86,7 +86,7 @@ const Head = () => {
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search"
             onFocus={() => setShowSuggestions(true)}
-            onBlur={() => setShowSuggestions(false)}
+            // onBlur={() => setShowSuggestions(false)}
             onKeyDown={(e) => {
               if (e.key === "Enter") {
                 searchVideos(searchQuery); // Trigger search on Enter

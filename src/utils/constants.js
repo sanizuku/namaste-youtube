@@ -1,7 +1,7 @@
 export const Google_Api_Key = "AIzaSyADNt0LxouYLJNhCulcWTp3TpH6bf-8DwE";
 
 const Youtube_Video_Url =
-  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&key=" +
+  "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=" +
   Google_Api_Key;
 
 export const Youtube_Search_Query_Api =
@@ -15,5 +15,7 @@ export const YOUTUBE_LOGO_URL =
 
 export const USER_ICON_URL =
   "https://www.pngkey.com/png/full/115-1150420_avatar-png-pic-male-avatar-icon-png.png";
+
+export const LIVE_CHAT_COUNT = 10;
 
 export default Youtube_Video_Url;

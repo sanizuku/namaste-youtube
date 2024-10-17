@@ -3,7 +3,6 @@ import ButtonList from "./ButtonList";
 import VideoContainer from "./VideoContainer";
 import { useLocation } from "react-router-dom";
 import SearchResults from "./SearchReults";
-<<<<<<< HEAD
 import { useSelector } from "react-redux";
 
 const MainContainer = () => {
@@ -11,15 +10,6 @@ const MainContainer = () => {
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
   // Check if the current path contains '/search'
   const isSearchResultsPage = location.pathname.includes("/results");
-=======
-
-const MainContainer = () => {
-  const location = useLocation(); // Get the current route
-
-  // Check if the current path contains '/search'
-  const isSearchResultsPage = location.pathname.includes("/results");
-
->>>>>>> 39b982be48fdac07ecd83bdcb9f203822750f431
   return (
     // <div className="flex-1 overflow-hidden">
     //   {/* Sticky Button List */}
@@ -46,6 +36,7 @@ const MainContainer = () => {
       <div className="flex-1 overflow-y-auto p-4">
         {isSearchResultsPage ? <SearchResults /> : <VideoContainer />}
       </div>
+      <div className="mb-12"></div>
     </div>
   );
 };
