@@ -1,5 +1,5 @@
 const Comment = ({ data }) => {
-  const { name, text, replies } = data;
+  const { name, text } = data;
   return (
     <div className="flex shadow-md bg-gray-400 p-2 rounded-lg m-2">
       <img

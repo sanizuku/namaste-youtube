@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Youtube_Video_Url from "../utils/constants";
 import VideoCard from "./VideoCard";
 import { Link } from "react-router-dom";
@@ -9,9 +9,6 @@ const VideoContainer = () => {
   // const [videos, setVideos] = useState([]);
   const dispatch = useDispatch();
   const videos = useSelector((store) => store.video.videos[0]);
-  useEffect(() => {
-    getVideos();
-  }, []);
   const getVideos = async () => {
     const data = await fetch(Youtube_Video_Url);
     const json = await data.json();
@@ -19,6 +16,10 @@ const VideoContainer = () => {
     dispatch(addVideo(json.items));
     // setVideos(json?.items);
   };
+  useEffect(() => {
+    getVideos();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
