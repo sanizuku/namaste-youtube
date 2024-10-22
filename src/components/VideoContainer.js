@@ -6,14 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addVideo } from "../utils/videoSlice";
 
 const VideoContainer = () => {
-  // const [videos, setVideos] = useState([]);
   const dispatch = useDispatch();
   const videos = useSelector((store) => store.video.videos[0]);
   const getVideos = async () => {
     const data = await fetch(Youtube_Video_Url);
     const json = await data.json();
-    console.log(json.items);
-    dispatch(addVideo(json.items));
+    dispatch(addVideo(json?.items));
     // setVideos(json?.items);
   };
   useEffect(() => {

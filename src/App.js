@@ -1,5 +1,4 @@
 import "./App.css";
-import Head from "./components/Head";
 import Body from "./components/Body";
 import { Provider } from "react-redux";
 import store from "./utils/store";
@@ -31,22 +30,19 @@ function App() {
   ]);
   return (
     <Provider store={store}>
-      <div className="flex flex-col h-screen overflow-hidden">
-        <Head />
-        <RouterProvider router={appRouter} />
+      <RouterProvider router={appRouter} />
 
-        {/**
-         *Head
-         *Body
-         * Sidebar
-         *   MenuItems
-         * MainContainer
-         *   buttonlist
-         *   videocontainer
-         *     videocard
-         *
-         */}
-      </div>
+      {/**
+       *Head
+       *Body
+       * Sidebar
+       *   MenuItems
+       * MainContainer
+       *   buttonlist
+       *   videocontainer
+       *     videocard
+       *
+       */}
     </Provider>
   );
 }

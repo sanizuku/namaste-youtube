@@ -10,6 +10,7 @@ import {
 import { cacheResults } from "../utils/searchSlice";
 
 import ToggleSwitch from "./ToogleSwitch";
+import { useNavigate } from "react-router-dom";
 
 // import { useNavigate } from "react-router-dom";
 
@@ -23,7 +24,7 @@ const Head = () => {
     dispatch(toggleMenu());
   };
   const isDarkMode = useSelector((state) => state.theme.isDarkMode);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const searchCache = useSelector((store) => store.search);
   const getSearchSuggestion = useCallback(async () => {
     const data = await fetch(Youtube_Search_Query_Api + searchQuery);
@@ -48,10 +49,7 @@ const Head = () => {
   }, [searchQuery]);
 
   const searchVideos = (query) => {
-    console.log("Searching for:", query); // Log the query
-    // setCurrentSearch(query);
-    window.location.href = `/results?search_query=${query}`;
-    // navigate(`/searchResults?q=${query}`);
+    navigate(`/results?search_query=${query}`);
     setShowSuggestions(false); // Hide suggestions after selection
   };
   return (

@@ -7,15 +7,19 @@ const SearchResults = () => {
   const [searchResults, setSearchResults] = useState([]);
   const fetchSearchResults = async () => {
     const api = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${query}&key=${process.env.REACT_APP_API_KEY}`;
-    console.log("aaa", api);
+
     const response = await fetch(api);
     const data = await response.json();
-    console.log("dataa", data.items);
+
     const filteredResults = data?.items.filter(
       (result) => result.id.kind === "youtube#video"
     );
-    console.log("kaka", filteredResults);
-    setSearchResults(filteredResults); // Update the results with fetched data
+    if (filteredResults) {
+      setSearchResults(filteredResults);
+      // Update the results with fetched data
+    } else {
+      setSearchResults([]);
+    }
   };
   useEffect(() => {
     // Fetch search results based on the query
@@ -44,6 +48,7 @@ const SearchResults = () => {
             </div>
           </Link>
         ))}
+      <div className="mb-24"></div>
     </div>
   );
 };

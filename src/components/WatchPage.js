@@ -55,7 +55,7 @@ const WatchPage = () => {
       <div>
         <CommentContainer />
       </div>
-      <div className="mb-12"></div>
+      <div className="mb-16"></div>
     </div>
   );
 };

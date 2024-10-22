@@ -36,7 +36,7 @@ const MainContainer = () => {
       <div className="flex-1 overflow-y-auto p-4">
         {isSearchResultsPage ? <SearchResults /> : <VideoContainer />}
       </div>
-      <div className="mb-12"></div>
+      <div className="mb-16"></div>
     </div>
   );
 };
