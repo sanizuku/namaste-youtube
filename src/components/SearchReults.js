@@ -1,13 +1,12 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { Google_Api_Key } from "../utils/constants";
 
 const SearchResults = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("search_query");
   const [searchResults, setSearchResults] = useState([]);
   const fetchSearchResults = async () => {
-    const api = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${query}&key=${Google_Api_Key}`;
+    const api = `https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=25&q=${query}&key=${process.env.REACT_APP_API_KEY}`;
     console.log("aaa", api);
     const response = await fetch(api);
     const data = await response.json();

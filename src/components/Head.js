@@ -8,7 +8,7 @@ import {
   Youtube_Search_Query_Api,
 } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
-import SearchVideos from "./SearchVideos";
+
 import ToggleSwitch from "./ToogleSwitch";
 
 // import { useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ import ToggleSwitch from "./ToogleSwitch";
 const Head = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
-  const [currentSearch, setCurrentSearch] = useState("");
+  // const [currentSearch, setCurrentSearch] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(true);
   const dispatch = useDispatch();
   const toggleMenuHandler = () => {
@@ -49,7 +49,7 @@ const Head = () => {
 
   const searchVideos = (query) => {
     console.log("Searching for:", query); // Log the query
-    setCurrentSearch(query);
+    // setCurrentSearch(query);
     window.location.href = `/results?search_query=${query}`;
     // navigate(`/searchResults?q=${query}`);
     setShowSuggestions(false); // Hide suggestions after selection
@@ -126,7 +126,6 @@ const Head = () => {
       </div>
       <ToggleSwitch />
       <img className="h-9" alt="user-icon" src={USER_ICON_URL} />
-      {currentSearch && <SearchVideos data={currentSearch} />}
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { closeMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
-import { Google_Api_Key } from "../utils/constants";
+
 import ReactPlayer from "react-player";
 import CommentContainer from "./CommentContainer";
 import LiveChat from "./LiveChat";
@@ -18,7 +18,7 @@ const WatchPage = () => {
       "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=" +
         searchParams.get("v") +
         "&key=" +
-        Google_Api_Key
+        process.env.REACT_APP_API_KEY
     );
 
     const json = await videoData.json();

@@ -1,6 +1,6 @@
 const Youtube_Video_Url =
   "https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=IN&key=" +
-  process.env.Google_Api_Key;
+  process.env.REACT_APP_API_KEY;
 
 export const Youtube_Search_Query_Api =
   "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
